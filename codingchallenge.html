@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+
+  <h2>Coding Challenge</h2>
+
+  Enter a number:
+  <input type="text" id="enterednumber" >
+  <input id="submit" type="button" value="submit"        onclick="validateInput();" />
+
+  <div id ="target_div"> 
+  </div>
+
+  <div id ="error_div"> 
+  </div>
+
+<script>
+
+<!-- asynchronous func to populate error and target divs -->
+async function validateInput(){
+ var a = document.getElementById("enterednumber").value;
+  if (a > 0) {
+  	gid('target_div').textContent = "Please wait for "+ a + " seconds"
+    gid('error_div').textContent = ""
+    var result = await resolveAfterSeconds(a);
+    gid('target_div').textContent = result
+  }
+  else{
+  	gid('error_div').textContent = "Error!!Input is blank. Please enter a number."
+    gid('target_div').textContent = ""
+  }
+}
+
+<!-- func returns after a 'a' number of seconds-->
+function resolveAfterSeconds(a) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('finished processing');
+    }, a*1000);
+  });
+}
+
+<!-- func to obtain elements on html by their id-->
+function gid(id){
+return document.getElementById(id);
+}
+
+
+</script>
+
+
+</body>
+</html>
